@@ -1,0 +1,46 @@
+
+  
+@import url('https://fonts.googleapis.com/css?family=Saira:300,400&display=swap')
+
+.container__main
+  @include content-header()
+  width: 100%
+  height: 100%
+  border-radius: 0 0 10px 10px
+  background-color: rgba(255, 255, 255, 0.89)
+  
+  .body__info
+    width: inherit
+
+  .header
+    background: linear-gradient(-45deg, #23d5ab, #23a6d5, #e73c7e, #ee7752) 
+    background-size: 400% 1px
+    animation: gradient 15s ease infinite
+    //background-image: linear-gradient(to left bottom, #f53c64, #fe2f7a, #ff2593, #ff24af, #ff2fcd, #f735db, #ed3dea, #e146f8, #d345f9, #c545f9, #b745f9, #a745f9)
+    border-top-right-radius: 0
+    margin-bottom: 20px
+
+  .avatar__dezmunt
+    width: 200px
+    height: auto
+    justify-content: center
+
+  .last_paragraph
+    margin-bottom: 40px !important
+
+  .MuiTypography-body1
+    margin-bottom: 10px
+  
+
+//Not mobile
+@media ( min-width: 480px )
+  .header
+    border-top-right-radius: 10px !important
+    
+  .container__main
+    border-radius: 0px 10px 10px 10px
+    width: 99%
+    height: 99.8%
+    padding-bottom: 1%
+  
+  

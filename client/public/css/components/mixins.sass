@@ -1,0 +1,32 @@
+@mixin content-header
+  background-color: #a5ffcb
+  width: 99%
+  height: 99.8%
+  border-radius: 0 10px 10px 10px
+  display: grid
+
+  .header
+    display: grid
+    background: linear-gradient(90deg, #1FA2FF 0%, #12D8FA 50%, #A6FFCB 100%)
+    border-top-right-radius: 10px
+    height: 100px
+    align-items: center
+
+    p.header__text
+      padding-left: 20px
+      margin: 0
+      font-family: 'Days One', sans-serif
+      font-size: 50px
+      text-transform: uppercase
+      color: #ffffff
+
+@mixin horizontal-line // Для вставки через after
+  content: ""
+  display: block
+  width: 80%
+  height: 1px
+  padding: 0 30px
+  background-color: #C4C4C4
+  position: absolute
+  left: 50%
+  transform: translateX(-50%)

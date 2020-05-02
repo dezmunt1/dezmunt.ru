@@ -1,0 +1,116 @@
+@import url("https://fonts.googleapis.com/css?family=Play&display=swap");
+#nav-bar {
+  display: none;
+}
+
+.navigation {
+  display: -ms-grid;
+  display: grid;
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  z-index: 999;
+  -ms-grid-columns: 100%;
+      grid-template-columns: 100%;
+  -ms-grid-rows: minmax(200px, auto) minmax(200px, auto);
+      grid-template-rows: minmax(200px, auto) minmax(200px, auto);
+  grid-area: nav;
+  -ms-grid-row-align: start;
+      align-self: start;
+  background-color: #293b5a;
+  border-radius: 10px 0 0 10px;
+}
+
+.navigation .navigation-logo {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  width: 100%;
+  height: 100%;
+  border-radius: 10px 0 0 10px;
+  background-color: #1b283d;
+  -webkit-box-pack: stretch;
+      -ms-flex-pack: stretch;
+          justify-content: stretch;
+  -ms-flex-item-align: center;
+      align-self: center;
+}
+
+.navigation .navigation-logo img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+.navigation-list--item {
+  font-family: 'Play';
+  color: #fff;
+  height: 30px;
+}
+
+.navigation-list--item.active {
+  background-color: #465e85;
+}
+
+.navigation-list--item:hover {
+  background-color: #465e85;
+}
+
+.navigation-list--item:hover a {
+  color: #ffffff;
+  text-decoration: none;
+}
+
+.navigation-list--item a {
+  display: -ms-grid;
+  display: grid;
+  -ms-grid-columns: 10% 90%;
+      grid-template-columns: 10% 90%;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  text-decoration: none;
+  color: #fff;
+  height: 100%;
+  padding-left: 10px;
+}
+
+.navigation-list--item p {
+  margin: 0;
+  padding-left: 5px;
+}
+
+@media (max-width: 480px) {
+  #nav-bar {
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-item-align: center;
+        align-self: center;
+    -webkit-box-pack: end;
+        -ms-flex-pack: end;
+            justify-content: flex-end;
+  }
+  .navigation {
+    height: 40px;
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 1fr 1fr;
+        grid-template-columns: 1fr 1fr;
+    -ms-grid-rows: 40px;
+        grid-template-rows: 40px;
+    border-radius: 0;
+  }
+  .navigation .navigation-logo {
+    height: 100%;
+    border-radius: 0;
+    background: none;
+  }
+  .navigation-list {
+    display: none;
+  }
+  .navigation-list--item a {
+    -ms-grid-columns: 30px 90%;
+        grid-template-columns: 30px 90%;
+  }
+}
+/*# sourceMappingURL=navigation.css.map */
