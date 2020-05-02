@@ -1,8 +1,11 @@
 const express = require('express');
 const config = require('config');
 const mongoose = require('mongoose');
+const path = require('path');
+const https = require('https');
+const fs = require('fs');
 
-require('dotenv').config()
+let ssl_data = false;
 
 const PORT = config.get( 'PORT' ) || 3001;
 const app = express();
@@ -15,6 +18,10 @@ app.use( '/api/portfolio/', require('./routes/portfolio.routes') );
 app.use( '/api/blogs/',     require('./routes/blogs.routes') );
 
 if ( process.env.NODE_ENV === 'production') {
+  ssl_data = {
+    key: fs.readFileSync( config.get('SSL_KEY') ),
+    cert: fs.readFileSync( config.get('SSL_CERT') )
+  };
   app.use( '/', express.static(path.join(__dirname, 'client', 'build')));
 
   app.get( '*', (req, res) => {
@@ -31,9 +38,9 @@ async function startServer() {
     }, error => {
       if (!error) console.log(`[Server]: БД MongoDB успешно подключена`)
     });
-    
-    const server = app.listen( PORT, () => {
-      console.log(`[Server]: Соединение с сервером установлено по адресу: ${config.get('HOST')}:${server.address().port}`)
+    const serv = ssl_data ? https.createServer(ssl_data, app) : app;
+    serv.listen( PORT, () => {
+      console.log(`[Server]: Соединение с сервером установлено по адресу: ${config.get('HOST')}:${PORT}`)
     })
   } catch (error) {
     console.log(`[ServerError]: ${ error }`);
