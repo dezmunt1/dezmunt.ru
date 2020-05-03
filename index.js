@@ -17,8 +17,8 @@ app.use( '/api/projects/',  require('./routes/projects.routes') );
 app.use( '/api/portfolio/', require('./routes/portfolio.routes') );
 app.use( '/api/blogs/',     require('./routes/blogs.routes') );
 
-app.get( '/', async (req, res) => {
-  if( ssl_data ) return res.redirect( config.get( 'HOST' ) );
+app.get( '*', async (req, res) => {
+  if( ssl_data ) return res.redirect('https://' + req.headers.host + req.url);
 } )
 
 if ( process.env.NODE_ENV === 'production') {
