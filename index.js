@@ -17,6 +17,10 @@ app.use( '/api/projects/',  require('./routes/projects.routes') );
 app.use( '/api/portfolio/', require('./routes/portfolio.routes') );
 app.use( '/api/blogs/',     require('./routes/blogs.routes') );
 
+app.get( '/', async (req, res) => {
+  if( ssl_data ) return res.redirect( config.get( 'HOST' ) );
+} )
+
 if ( process.env.NODE_ENV === 'production') {
   ssl_data = {
     key: fs.readFileSync( config.get('SSL_KEY') ),
