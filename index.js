@@ -38,8 +38,10 @@ async function startServer() {
     }, error => {
       if (!error) console.log(`[Server]: БД MongoDB успешно подключена`)
     });
-    const serv = ssl_data ? https.createServer(ssl_data, app) : app;
-    serv.listen( PORT, () => {
+    if (ssl_data) {
+      https.createServer(ssl_data, app).listen( 443, () => console.log(`[Server]: Соединение с сервером установлено по адресу: ${config.get('HOST')}:443`))
+    } 
+    app.listen( PORT, () => {
       console.log(`[Server]: Соединение с сервером установлено по адресу: ${config.get('HOST')}:${PORT}`)
     })
   } catch (error) {
