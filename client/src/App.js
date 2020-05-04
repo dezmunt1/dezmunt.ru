@@ -17,11 +17,11 @@ function App() {
   return (
     <AppContext.Provider value={ {toastMessage: setProp} }>
       {TM}
-      <MainFrame>
-        <Router>
+      <Router>
+        <MainFrame>
           { useRoutes() }
-        </Router>
-      </MainFrame>
+        </MainFrame>
+      </Router>
     </AppContext.Provider>
   )
 }

@@ -1,4 +1,5 @@
-import React   from "react";
+import React  from "react";
+import {Link} from 'react-router-dom';
 
 import { Grommet, Box, Menu, Text } from "grommet";
 import { FormDown } from "grommet-icons";
@@ -12,10 +13,10 @@ export const Humburger = props => {
       label:
         <Box align="end">
           <div className="navigation-list--item">
-            <a href={ anchor.href } title={ anchor.title }>
+            <Link to={ anchor.pathname } title={ anchor.title }>
               <i className={ anchor.querySelector('i').className }></i>
                 <p>{ value.innerText.trim() }</p>
-            </a>
+            </Link>
           </div>
         </Box>,
       onClick: () => {}

@@ -1,4 +1,5 @@
 import React, { useEffect, useCallback, useState } from 'react';
+import { Link } from 'react-router-dom';
 import { useHttp } from '../../hook/http.hook';
 import { textFormater } from '../../utils/textFormater';
 import { useParams} from 'react-router-dom';
@@ -38,7 +39,7 @@ export const BlogOpenPage = () => {
               </div>
               <div className="stat__author">
                 <i className="fas fa-user"></i>
-                <a href={`/authors/${blog.author.link}`}>{blog.author.name}</a>
+                <Link to={`/authors/${blog.author.link}`}>{blog.author.name}</Link>
               </div>
               <div className="stat__date">
                 {new Date(blog.created).toDateString().slice(4)}

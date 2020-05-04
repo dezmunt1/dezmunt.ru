@@ -1,4 +1,5 @@
 import React, { useEffect, useCallback, useState } from 'react';
+import {Link} from 'react-router-dom';
 import { useHttp } from '../../hook/http.hook';
 import { textFormater } from '../../utils/textFormater';
 import {Button} from 'react-bootstrap'
@@ -35,7 +36,7 @@ export const BlogPage = () => {
                 </div>
                 <div className="stat__author">
                   <i className="fas fa-user"></i>
-                  <a href={`/authors/${blog.author.link}`}>{blog.author.name}</a>
+                  <Link to={`/authors/${blog.author.link}`}>{blog.author.name}</Link>
                 </div>
                 <div className="stat__date">
                   {new Date(blog.created).toDateString().slice(4)}
@@ -52,9 +53,13 @@ export const BlogPage = () => {
             </div>
             {/* nextButton */}
             <div className="blog__preview_btn">
-              <Button  variant="secondary" size="lg" href={`/blog/article/${blog._id}`}>
-                ДАЛЕЕ
-              </Button> 
+              
+              <Link to={`/blog/article/${blog._id}`}style= {{width: "80%"}}>
+                <Button  variant="secondary" size="lg">
+                  ДАЛЕЕ
+                </Button>
+              </Link>
+      
             </div>
             
           </div>

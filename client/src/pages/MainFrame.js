@@ -1,26 +1,27 @@
 import React, { useEffect } from 'react';
+import {Link} from 'react-router-dom';
 import { NavBarMobile } from '../components/NavBarMobile'
 
 export const MainFrame = props => {
 
   useEffect( () => {
     document.querySelectorAll('.navigation-list--item').forEach( item => {
-      if (item.firstElementChild.href === item.baseURI) {
-        item.classList.add('active');
-        return
-      };
-      item.classList.remove('active');
-    })
-  }, [])
-
+      item.addEventListener( 'click', event => {
+        const target = event.currentTarget;
+        document.querySelectorAll('.navigation-list--item').forEach( item => item.classList.remove('active') );
+        target.classList.add('active');
+      });   
+    });
+  }, []);
+  
   return (
     <div className="container">
       <div className="navigation">
         {/* LOGO */}
         <div className="navigation-logo">
-          <a href="/" title="На главную">
+          <Link to="/" title="На главную">
             <img src="/img/avatar.png" alt="avatar" />
-          </a>
+          </Link>
         </div> 
         {/* MOBILE_NAV */}
         <div id="nav-bar">
@@ -29,34 +30,34 @@ export const MainFrame = props => {
         {/* NAV_LIST */}
         <div className="navigation-list">
           <div className="navigation-list--item">
-            <a href='/' title="На главную">
+            <Link to='/' title="На главную" >
               <i className="fas fa-user-circle"></i>
               <p>главная</p>
-            </a>
+            </Link>
           </div>
           <div className="navigation-list--item">
-            <a href='/projects' title="Мои проекты">
+            <Link to='/projects' title="Мои проекты">
               <i className="fab fa-mendeley"></i>
               <p>мои проекты</p>
-            </a>
+            </Link>
           </div>
           <div className="navigation-list--item">
-            <a href='/portfolio' title="Моё портфолио">
+            <Link to='/portfolio' title="Моё портфолио">
               <i className="fas fa-stream"></i>
               <p>портфолио</p>
-            </a>
+            </Link>
           </div>
           <div className="navigation-list--item">
-            <a href='/blog' title="Мой блог">
+            <Link to='/blog' title="Мой блог">
               <i className="far fa-comment"></i>
               <p>блог</p>
-            </a>
+            </Link>
           </div>
           <div className="navigation-list--item">
-            <a href='/contacts' title="Связаться со мной">
+            <Link to='/contacts' title="Связаться со мной">
               <i className="far fa-id-badge"></i>
               <p>контакты</p>
-            </a>
+            </Link>
           </div>
         </div>
       </div>
