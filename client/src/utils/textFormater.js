@@ -29,11 +29,11 @@ export const textFormater = rawData => {
 
       rawText.forEach( item => {
         
-        if ( !!item.match(/^\*\*Image\d+/g) ) {
+        if ( !!item.match(/^\*\*(I|i)mage\d+/g) ) {
           const imageName = item
             .slice(2, -2)
             .match(/^(I|i)mage\d+/g) || "";  // Звёздочки остаются, их сослайсить и всетаки подумать про разделение по тегам 
-          return result.push( {type: document.createElement('img'), data: imageName[0].toLowerCase()} );
+          return result.push( {type: document.createElement('img'), data: imageName[0]} );
         };
         if ( item.startsWith('**p') ){
           const data = extraMarkup( item.slice(3, -3) );
@@ -53,8 +53,8 @@ function extraMarkup( str ) {
     .replace(/b\*=/g, '</b>')
     .replace(/=\*i/g, '<i>')
     .replace(/i\*=/g, '</i>')
-    .replace(/=\*ins/g, '<ins>')
-    .replace(/ins\*=/g, '</ins>');
+    .replace(/=\*u/g, '<ins>')
+    .replace(/u\*=/g, '</ins>');
   return result;
 }
 

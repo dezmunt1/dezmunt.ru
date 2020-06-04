@@ -1,4 +1,6 @@
 import React from 'react';
+import {Link} from 'react-router-dom';
+
 import { Avatar, Box, Typography, Divider, useMediaQuery } from '@material-ui/core';
 
 export const MainPage = () => {
@@ -40,7 +42,7 @@ export const MainPage = () => {
           <Divider variant="middle"/>
           <Typography classes={{root: 'last_paragraph'}} variant="body1" align="center" >
             Если у Вас вдруг появились <nobr>вопросы/предложения</nobr> к работе ресурса, или просто Вы хотите связться со мной,
-            воспользуйтесь разделом <a href="/contacts">контакты</a>
+            воспользуйтесь разделом <Link to="/contacts">контакты</Link>
           </Typography>
         </Box>
         

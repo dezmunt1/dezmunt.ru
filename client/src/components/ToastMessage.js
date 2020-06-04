@@ -14,7 +14,7 @@ export const ToastMessage  = ()  => {
         <Toast 
           onClose={() => setProp({show: false})}
           show={prop.show}
-          delay={3000}
+          delay={6000}
           autohide
         >
           <Toast.Header>

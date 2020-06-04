@@ -1,27 +1,64 @@
 import React, { useEffect, useCallback, useState } from 'react';
-import { Link } from 'react-router-dom';
+import { useParams, Link } from 'react-router-dom';
 import { useHttp } from '../../hook/http.hook';
 import { textFormater } from '../../utils/textFormater';
-import { useParams} from 'react-router-dom';
 import { Feedback } from '../../components/Feedback';
+import {Dialog} from '@material-ui/core';
+
+function ModalWindow( props ) {
+  const [ open, setOpen ] = useState(false);
+
+  const Component = props.content;
+
+  const handleOpen = ( {target} ) => {
+    setOpen( true );
+  }
+
+  const handleClose = ( {target} ) => {
+    setOpen( false );
+  }
+
+  const noop = () => {};
+
+  return (
+    <React.Fragment>
+      <Component handle={handleOpen} />
+      <Dialog onClose={handleClose} aria-labelledby="simple-dialog-title" open={ open } maxWidth="lg">
+        <Component handle={noop} />
+      </Dialog>
+    </React.Fragment>
+  )
+}
+
 
 export const BlogOpenPage = () => {
-  const [state, setState] = useState(null);
+  const [ state, setState ] = useState(null);
   const { request } = useHttp();
   const blogId = useParams().id;
   
   const get = useCallback( async () => {
     try {
+      if ( state ) {
+        return undefined;
+      }
       const blog = (await request(`/api/blogs/${blogId}`)).message;
-      
       const text = textFormater({ type: 'blog', data: blog.blogPost.full.text });
       const textBlock = text.map( (val, i) => {
-        if (val.type.tagName === 'P') return val.data;
+        if (val.type.tagName === 'P') return <p key={i + 1}>{val.data}</p>;
         if (val.type.tagName === 'IMG') {
-          const linkToImage = val.data.length === 0 ? "" : `url('/img/blogs/${blog._id}/${val.data}.png')`;
-          return <div key={i+1} className="text__body_image" style={{backgroundImage: linkToImage}}>
-            <img src={`/img/blogs/${blog._id}/${val.data}.png`} alt={val.data} />
-          </div>;
+          const linkToImage = val.data.length === 0 ? "" : `url('${blog.blogPost.full.images[val.data]}')`;
+          const Content = props => {
+            return (
+              <div key={i+1} className="text__body_image" style={{backgroundImage: linkToImage}} onClick={props.handle}>
+                <img width="100%" src={ blog.blogPost.full.images[val.data] } alt={val.data} />
+              </div>
+            )
+          };
+            
+          
+          return (
+            <ModalWindow content={Content} key={i + 1}/>
+          )
         };
         return undefined
       });
@@ -29,7 +66,7 @@ export const BlogOpenPage = () => {
       const Component = (
         <div className="blog__item">
           {/* Image */}
-          <div className="blog__preview_image" style={{ backgroundImage: `url(${blog.blogPost.full.images.main})` }}>
+          <div className="blog__preview_image" style={{ backgroundImage: `url(${blog.blogPost.full.images.previewImage})` }}>
             
               {/* Statistic */}
             <div className="blog__preview_stat">
@@ -49,26 +86,29 @@ export const BlogOpenPage = () => {
           </div>
           {/* text */}
           <div className="blog__preview_text">
-            <div className="text__header">{blog.blogPost.full.header}</div>
+            <div className="text__header">{blog.blogPost.preview.header}</div>
             <div className="text__body">
               { textBlock }
             </div>
           </div>
           {/* feedback */}
-          <Feedback rate={blog.rate} link={blog.link} blogId={blog._id} />
+          <Feedback rate={blog.rate} link={window.location.href} blogId={blog._id} />
         </div>
       );
-      return setState(Component)
+      if ( !state ) setState(Component);
+      return undefined;
     } catch (error) {}
-  }, [request, blogId] )
+  }, [request, blogId, state] )
 
   useEffect(() => {
-    get()
-    request(`/api/blogs/new-views/${blogId}`);
+    get();
     const comments = document.querySelector('.body__info').children.length;
-    if( comments === 0 ) addComents();
-  }, [get, request, blogId]);
-
+    if( comments === 0 ) {
+      addComents();
+      request(`/api/blogs/new-views/${blogId}`);
+    };
+  }, [request, blogId, get]);
+  
   return (
     <div className="container__blog">
       {/* HEADER */}

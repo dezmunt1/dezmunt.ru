@@ -12,10 +12,13 @@ export const useHttp = () => {
         headers['Content-Type'] = 'application/json';
       }
       const response = await fetch( url, { method, body, headers });
-      const data = response.json();
+      const data = await response.json();
 
       if ( response.status === 401) {
-        throw new Error( `${response.status}`);
+        throw new Error( `401__${data.errors}`);
+      };
+      if ( response.status === 404) {
+        throw new Error( `404__${data.errors}`);
       };
 
       if ( !response.ok) {

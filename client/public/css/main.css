@@ -5,7 +5,7 @@
 @import url("https://fonts.googleapis.com/css?family=Saira:300,400&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Saira:300,400&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Saira:300,400&display=swap");
-@import url("https://fonts.googleapis.com/css?family=Montserrat:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i&display=swap");
+@import url("https://fonts.googleapis.com/css?family=Montserrat:300,300i,500,500i,900,900i&display=swap");
 body {
   background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
   background-size: 400% 1px;
@@ -6170,9 +6170,9 @@ readers do not read off random characters that represent icons */
   font-family: 'Montserrat', sans-serif;
   font-weight: 300i;
   font-style: italic;
-  font-size: 10px;
+  font-size: 12px;
   margin-bottom: 5px;
-  height: 28px;
+  height: 45px;
   padding-left: 10px;
 }
 
@@ -6417,6 +6417,13 @@ readers do not read off random characters that represent icons */
 
 .container__blog .body__info {
   width: inherit;
+  height: 40px;
+}
+
+.container__blog .body__info .MuiPagination-ul {
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
 }
 
 .container__blog .header {
@@ -6532,6 +6539,7 @@ readers do not read off random characters that represent icons */
   background-size: cover;
   background-repeat: no-repeat;
   margin: 15px 0;
+  width: 100%;
 }
 
 .container__blog .body .blog__preview_text .text__body .text__body_image img {
@@ -6746,6 +6754,17 @@ readers do not read off random characters that represent icons */
   }
 }
 
+.conatainer_createblog {
+  width: 100%;
+  min-height: 100vh;
+  background-image: -webkit-gradient(linear, left bottom, right top, from(#d16ba5), color-stop(#c777b9), color-stop(#ba83ca), color-stop(#aa8fd8), color-stop(#9a9ae1), color-stop(#8aa7ec), color-stop(#79b3f4), color-stop(#69bff8), color-stop(#52cffe), color-stop(#41dfff), color-stop(#46eefa), to(#5ffbf1));
+  background-image: linear-gradient(to right top, #d16ba5, #c777b9, #ba83ca, #aa8fd8, #9a9ae1, #8aa7ec, #79b3f4, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
+}
+
+input #file-upload-button {
+  display: none !important;
+}
+
 /*!
  * Font Awesome Free 5.12.1 by @fontawesome - https://fontawesome.com
  * License - https://fontawesome.com/license/free (Icons: CC BY 4.0, Fonts: SIL OFL 1.1, Code: MIT License)
@@ -6921,7 +6940,7 @@ readers do not read off random characters that represent icons */
 
 body {
   width: 100%;
-  height: 100%;
+  min-height: 100vh;
   margin: 0;
   padding: 0;
 }

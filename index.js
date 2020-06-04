@@ -32,12 +32,16 @@ if ( process.env.NODE_ENV === 'production') {
   app.get( '*', (req, res) => {
       res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
   })
+} else {
+  app.use(express.static(__dirname));
 }
 
 async function startServer() {
   try {
     await mongoose.connect( config.get( 'MONGO_URI' ), {
       useNewUrlParser: true,
+      user: config.get( 'MONGO_USER' ),
+      pass: config.get( 'MONGO_PWD' ),
       useUnifiedTopology: true,
       useCreateIndex: true
     }, error => {

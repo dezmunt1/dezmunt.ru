@@ -3,5 +3,6 @@ import { createContext } from 'react';
 function noop() {};
 
 export const AppContext = createContext({
-  toastMessage: noop
+  toastMessage: noop,
+  authorData: undefined
 });
