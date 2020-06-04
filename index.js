@@ -45,7 +45,11 @@ async function startServer() {
       useUnifiedTopology: true,
       useCreateIndex: true
     }, error => {
-      if (!error) console.log(`[Server]: БД MongoDB успешно подключена`)
+      if (!error) {
+        console.log(`[Server]: БД MongoDB успешно подключена`)
+      } else {
+        console.log(`[Server]: ${error}`)
+      }
     });
     if (ssl_data) {
       https.createServer(ssl_data, app).listen( 443, () => console.log(`[Server]: Соединение с сервером установлено по адресу: ${config.get('HOST')}:443`))
