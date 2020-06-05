@@ -30,13 +30,14 @@ if ( process.env.NODE_ENV === 'production') {
     cert: fs.readFileSync( config.get('SSL_CERT') )
   };
   app.use( '/', express.static(path.join(__dirname, 'client', 'build')));
-  app.use( '/', express.static(path.join(__dirname, 'client', 'public', 'img')));
+  app.use( '/', express.static(path.join(__dirname, 'client', 'image')));
 
   app.get( '*', (req, res) => {
       res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))
   })
 } else {
   app.use(express.static(__dirname));
+  app.use( '/', express.static(path.join(__dirname, 'client', 'image')));
 }
 
 async function startServer() {

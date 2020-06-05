@@ -68,8 +68,8 @@ router.get( '/:id', async (req, res) => {
 router.post( '/create', upload.any(), async (req, res) => {
   try {
     const blog = new BlogsModel();
-    const blogPath = path.resolve( './client/public/img/blogs', blog.id );
-    const forImagePath = path.resolve( `${ isProduction ? "" : '/img' }/blogs`, blog.id );
+    const blogPath = path.resolve( './client/image/blogs', blog.id );
+    const forImagePath = path.resolve( `/blogs/`, blog.id );
     
     await fs.mkdir( `${blogPath}`, {recursive: true} );
 
@@ -166,7 +166,7 @@ router.delete( '/delete/:blogid&:authorid', async (req, res) => {
   try {
     const blogId = req.params.blogid;
     const authorid = req.params.authorid;
-    const blogDir = path.resolve( './client/public/img/blogs', blogId );
+    const blogDir = path.resolve( './client/image/blogs', blogId );
     await BlogsModel.deleteOne({_id: Types.ObjectId( blogId )});
     await AuthorsModel.updateOne({_id: Types.ObjectId(authorid)}, {$pull: { blogs: Types.ObjectId(blogId)}}); // найти в массиве puull delete
     await fsRemove( blogDir );
@@ -211,8 +211,8 @@ function getUpdateArray( textFields, fileFields ) {
     updates.push( {$set: { [dbDataPath]: textFields[field]}} );
   };
   // File Fields
-  const blogPath = path.resolve( './client/public/img/blogs', textFields.blogId );
-  const forImagePath = path.resolve( `${ isProduction ? "" : '/img' }/blogs`, textFields.blogId );
+  const blogPath = path.resolve( './client/image/blogs', textFields.blogId );
+  const forImagePath = path.resolve( `/blogs/`, textFields.blogId );
 
   fileFields.forEach( element => {
     const mime = element.mimetype.split('/')[1];

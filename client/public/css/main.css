@@ -6,6 +6,37 @@
 @import url("https://fonts.googleapis.com/css?family=Saira:300,400&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Saira:300,400&display=swap");
 @import url("https://fonts.googleapis.com/css?family=Montserrat:300,300i,500,500i,900,900i&display=swap");
+body {
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 1px;
+  -webkit-animation: gradient 15s ease infinite;
+          animation: gradient 15s ease infinite;
+}
+
+@-webkit-keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
 #nav-bar {
   display: none;
 }
