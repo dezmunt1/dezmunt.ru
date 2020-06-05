@@ -17,10 +17,12 @@ app.use( '/api/projects/',  require('./routes/projects.routes') );
 app.use( '/api/portfolio/', require('./routes/portfolio.routes') );
 app.use( '/api/blogs/',     require('./routes/blogs.routes') );
 
-app.use( (req, res, next) => {
-  if( req.secure ) return next();
-  return res.redirect('https://' + req.headers.host + req.url);
-});
+// Without CloudFlare
+
+// app.use( (req, res, next) => {
+//   if( req.secure ) return next();
+//   return res.redirect('https://' + req.headers.host + req.url);
+// });
 
 if ( process.env.NODE_ENV === 'production') {
   ssl_data = {
@@ -28,6 +30,7 @@ if ( process.env.NODE_ENV === 'production') {
     cert: fs.readFileSync( config.get('SSL_CERT') )
   };
   app.use( '/', express.static(path.join(__dirname, 'client', 'build')));
+  app.use( '/', express.static(path.join(__dirname, 'client', 'public', 'img')));
 
   app.get( '*', (req, res) => {
       res.sendFile(path.resolve(__dirname, 'client', 'build', 'index.html'))

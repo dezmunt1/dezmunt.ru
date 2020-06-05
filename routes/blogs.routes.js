@@ -9,6 +9,8 @@ const AuthorsModel = require('../models/AuthorsModel');
 const multer  = require('multer');
 const upload = multer({ dest: 'uploads/' });
 
+const isProduction = process.env.NODE_ENV === 'production';
+
 const router = Router();
 const resError = (res, status, message,) => res.status(status).json({ message: "", errors: message });
 
@@ -67,7 +69,7 @@ router.post( '/create', upload.any(), async (req, res) => {
   try {
     const blog = new BlogsModel();
     const blogPath = path.resolve( './client/public/img/blogs', blog.id );
-    const forImagePath = path.resolve( '/img/blogs', blog.id );
+    const forImagePath = path.resolve( `${ isProduction ? "" : '/img' }/blogs`, blog.id );
     
     await fs.mkdir( `${blogPath}`, {recursive: true} );
 
@@ -210,7 +212,7 @@ function getUpdateArray( textFields, fileFields ) {
   };
   // File Fields
   const blogPath = path.resolve( './client/public/img/blogs', textFields.blogId );
-  const forImagePath = path.resolve( '/img/blogs', textFields.blogId );
+  const forImagePath = path.resolve( `${ isProduction ? "" : '/img' }/blogs`, textFields.blogId );
 
   fileFields.forEach( element => {
     const mime = element.mimetype.split('/')[1];
