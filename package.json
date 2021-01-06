@@ -16,7 +16,7 @@
   "license": "ISC",
   "dependencies": {
     "@types/sass": "^1.16.0",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "config": "^3.3.0",
     "express": "^4.17.1",
     "fs-extra": "^9.0.0",
